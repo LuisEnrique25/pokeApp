@@ -13,10 +13,10 @@ const PokeId = () => {
   const {pokemonName} = useParams()
   const [pokeTypes, setPokeTypes] = useState([])
   const [pokeMovements, setPokeMovements] = useState([])
+  const [mainMoves, setMainMoves] = useState([])
   
-  console.log(pokemon);
-  console.log(pokeTypes);
-  console.log(pokeMovements);
+  console.log(mainMoves);
+  
   const percentProgresStat = (baseStat) => {
     const stat = `${(baseStat * 100) / 255}%`
     
@@ -34,6 +34,7 @@ const PokeId = () => {
         setPokemon(data)
         setPokeTypes(data.types)
         setPokeMovements(data.moves)
+        setMainMoves(data.abilities)
       })
       .then((err)=> console.log(err))
 
@@ -81,22 +82,26 @@ const PokeId = () => {
 
           {/**TIPO Y HABILIDADES */}
 
-          <section>
-            <div className='capitalize'>
+          <section className='flex justify-center items-center gap-4'>
+            <div className='capitalize flex justify-center items-center flex-col gap-3'>
               <h3>Type</h3>
+              <div className='flex gap-3 flex-col md:flex-row'>
               {
-                pokeTypes.map((type) => <p key={type.type.url}>{type.type.name}</p> )
+                pokeTypes.map((type) => <div key={type.type.url} className='bg-slate-600 py-1 w-20 sm:w-32 text-center rounded-sm px-3'> <h4 >{type.type.name}</h4></div> )
               }
+              </div>
             </div>
 
-            <div className='capitalize'>
+            <div className='capitalize flex justify-center items-center flex-col gap-3'>
               <h3>Habilities</h3>
-              <p>{pokemon?.abilities[0].ability.name}</p>
-              <p>{pokemon?.abilities[1].ability.name}</p>
-              
+              <div className='flex gap-3 flex-col md:flex-row'>
+              {
+                mainMoves.map((move) =>  <div key={move.ability.url} className='border-[1px] py-1 sm:w-32 text-center rounded-sm px-3'> <h4 >{move.ability.name}</h4></div> )
+              }
+              </div> 
             </div>
-          </section>
 
+          </section>
 
 
 
@@ -108,7 +113,6 @@ const PokeId = () => {
               <hr className='border-gray-300 w-full border-[1px]'/>
               <img src="/images/pokeball.webp" alt="" className='h-10  animate-spin-slow' />
             </div>
-
             <section>
               {
                 pokemon?.stats.map((stat) => (
@@ -117,17 +121,13 @@ const PokeId = () => {
                       <h5>{stat.stat.name}</h5>
                       <span>{stat.base_stat}/255</span>
                     </section>
-
                     <section className='bg-gray-400 h-4 sm:h-8 rounded-md overflow-hidden'>
                       <div style={{width: percentProgresStat(stat.base_stat)}} className='h-full bg-gradient-to-r via-orange-600 from-orange-500 to-red-600 rounded-r-md '></div>
-
                     </section>
                   </article>))
               }
             </section>
           </section>
-
-
         </article>
 
       </section>
@@ -135,16 +135,13 @@ const PokeId = () => {
       {/**SECCION DE HABILIDADES */}
 
       <section className='flex justify-center mt-14 items-center mb-9 '>
-        
          <article className='p-5 w-[400px] sm:w-[800px] transition-all duration-100 ease-linear  rounded-sm  shadow-xl relative '>
-
           {/**STAT TITLE */}
            <div className='flex items-center gap-3 mb-5 sm:mb-9'>
                 <h4 className='text-3xl font-semibold'>Movements</h4>
                 <hr className='border-gray-300 w-full border-[1px]'/>  
                 <img src="/images/pokeball.webp" alt="" className='h-10  animate-spin-slow' />
             </div>
-
             {/**LISTA DE HABILIDADES */}
             <section className='flex flex-wrap gap-3 items-center '>
                 {
