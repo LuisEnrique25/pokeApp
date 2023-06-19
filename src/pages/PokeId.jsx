@@ -11,34 +11,45 @@ const pokeLinearGradients = {
 const PokeId = () => {
   const [pokemon, setPokemon] = useState(null)
   const {pokemonName} = useParams()
+  const [pokeTypes, setPokeTypes] = useState([])
+  const [pokeMovements, setPokeMovements] = useState([])
   
   console.log(pokemon);
+  console.log(pokeTypes);
+  console.log(pokeMovements);
   const percentProgresStat = (baseStat) => {
     const stat = `${(baseStat * 100) / 255}%`
     
     return stat
   }
+
+  
+ 
   
   useEffect(() => {
     const url = `https://pokeapi.co/api/v2/pokemon/${pokemonName}/`
 
     axios.get(url)
-      .then(({data})=>setPokemon(data))
+      .then(({data})=>{
+        setPokemon(data)
+        setPokeTypes(data.types)
+        setPokeMovements(data.moves)
+      })
       .then((err)=> console.log(err))
 
 
   }, [])
 
   return (
-    <main>
+    <main className='bg-slate-50'>
       <Header/>
-      <section className='flex justify-center items-center'>
+      <section className='flex justify-center mt-14 items-center '>
 
-        <article className='p-3 w-[400px] sm:w-[800px] transition-all duration-100 ease-linear'>
+        <article className='p-3 w-[400px] sm:w-[800px] transition-all duration-100 ease-linear  rounded-sm  shadow-xl  relative'>
           {/**HEADER */}
-          <section className={`relative mt-12 h-16 sm:h-32 ${pokeLinearGradients[pokemon?.types[0].type.name]} transition-all duration-100 ease-linear `}>
+          <section className={`relative  h-16 sm:h-32 ${pokeLinearGradients[pokemon?.types[0].type.name]} transition-all duration-100 ease-linear absolute top-0 `}>
               <div className=' px-12 flex justify-center '>
-                  <img className='w-[125px] sm:w-[200px] absolute -translate-y-16 sm:-translate-y-20 transition-all duration-100 ease-linear' src={pokemon?.sprites.other["official-artwork"].front_default} alt={pokemon?.name}/>
+                  <img className='w-[150px] sm:w-[225px] absolute -translate-y-16 sm:-translate-y-20 transition-all duration-100 ease-linear drop-shadow-md z-50' src={pokemon?.sprites.other["official-artwork"].front_default} alt={pokemon?.name}/>
               </div>
 
           </section>
@@ -53,30 +64,62 @@ const PokeId = () => {
             <div className='flex justify-center items-center gap-3 px-4'>
               <hr className='border-gray-300 w-full border-[1px]'/>
               <h2 className='capitalize font-semibold sm:text-2xl'>{pokemon?.name}</h2>
-              <hr className='border-gray-300 w-full border-[1px]'/>
+              <hr className='border-gray-300 w-full border-[1px]'/>             
+            </div>
+
+            <section className='flex justify-center gap-8 text-xs text-center py-3'>
+              <div className='flex flex-col gap-1'>
+                <p>Weight</p>
+                <p>{pokemon?.weight}</p>
+              </div>
+              <div  className='flex flex-col gap-1'>
+                <p>Height</p>
+                <p>{pokemon?.height}</p>
+              </div>
+            </section>
+          </section>
+
+          {/**TIPO Y HABILIDADES */}
+
+          <section>
+            <div className='capitalize'>
+              <h3>Type</h3>
+              {
+                pokeTypes.map((type) => <p key={type.type.url}>{type.type.name}</p> )
+              }
+            </div>
+
+            <div className='capitalize'>
+              <h3>Habilities</h3>
+              <p>{pokemon?.abilities[0].ability.name}</p>
+              <p>{pokemon?.abilities[1].ability.name}</p>
               
             </div>
-            <div></div>
-
           </section>
 
 
 
 
            {/**STATS */}
+
           <section className='p-4'>
-            <h4>Stats</h4>
+            <div className='flex items-center gap-3 mb-3'>
+              <h4 className='text-3xl font-semibold'>Stats</h4>
+              <hr className='border-gray-300 w-full border-[1px]'/>
+              <img src="/images/pokeball.webp" alt="" className='h-10  animate-spin-slow' />
+            </div>
+
             <section>
               {
                 pokemon?.stats.map((stat) => (
-                  <article key={stat.stat.url}>
-                    <section className='capitalize flex justify-between items-center'>
+                  <article key={stat.stat.url} className=' mb-4'>
+                    <section className='capitalize flex justify-between items-center text-lg font-medium'>
                       <h5>{stat.stat.name}</h5>
                       <span>{stat.base_stat}/255</span>
                     </section>
 
                     <section className='bg-gray-400 h-4 sm:h-8 rounded-md overflow-hidden'>
-                      <div style={{width: percentProgresStat(stat.base_stat)}} className='h-full bg-yellow-500 '></div>
+                      <div style={{width: percentProgresStat(stat.base_stat)}} className='h-full bg-gradient-to-r via-orange-600 from-orange-500 to-red-600 rounded-r-md '></div>
 
                     </section>
                   </article>))
@@ -87,6 +130,28 @@ const PokeId = () => {
 
         </article>
 
+      </section>
+
+      {/**SECCION DE HABILIDADES */}
+
+      <section className='flex justify-center mt-14 items-center mb-9 '>
+        
+         <article className='p-5 w-[400px] sm:w-[800px] transition-all duration-100 ease-linear  rounded-sm  shadow-xl relative '>
+
+          {/**STAT TITLE */}
+           <div className='flex items-center gap-3 mb-5 sm:mb-9'>
+                <h4 className='text-3xl font-semibold'>Movements</h4>
+                <hr className='border-gray-300 w-full border-[1px]'/>  
+                <img src="/images/pokeball.webp" alt="" className='h-10  animate-spin-slow' />
+            </div>
+
+            {/**LISTA DE HABILIDADES */}
+            <section className='flex flex-wrap gap-3 items-center '>
+                {
+                  pokeMovements.map((move) => <p className='text-sm sm:text-base bg-slate-200 py-2 px-3 rounded-2xl capitalize' key={move.move.url}>{move.move.name}</p>)
+                }
+            </section>
+         </article>
       </section>
     </main>
   )
