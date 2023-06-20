@@ -58,7 +58,7 @@ const PokeId = () => {
   const [mainMoves, setMainMoves] = useState([])
   
  
-  console.log(pokemon);
+  
   const percentProgresStat = (baseStat) => {
     const stat = `${(baseStat * 100) / 255}%`
     

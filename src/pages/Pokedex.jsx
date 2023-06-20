@@ -9,18 +9,20 @@ const Pokedex = () => {
     const nameTrainer = useSelector(store => store.nameTrainer)
 
     
-    const [pokemons, setPokemons] = useState([])
-    const [namePokemon, setNamePokemon] = useState("")
-    const [types, setTypes] = useState([])
-    const [currentType, setCurrentType] = useState("")
-    const [currentPage, setCurrentPage] = useState(1)
+    const [pokemons, setPokemons] = useState([]);
+    const [namePokemon, setNamePokemon] = useState("");
+    const [types, setTypes] = useState([]);
+    const [currentType, setCurrentType] = useState("");
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pokePerPage, setPokePerPage] = useState(parseInt(localStorage.getItem("pokes_per_page")) || 12)
     
     const pokemonsByName = pokemons.filter((pokemon) => pokemon.name.includes(namePokemon.toLocaleLowerCase().trim()));
 
   
-
+    console.log(pokePerPage);
+    
     const paginationLogic = () => {
-        const POKEMONS_PER_PAGE = 12;
+        const POKEMONS_PER_PAGE = pokePerPage;
         const initialSlice = (currentPage - 1) * POKEMONS_PER_PAGE
 
         const finalSlice = initialSlice + POKEMONS_PER_PAGE
@@ -58,6 +60,14 @@ const Pokedex = () => {
         e.preventDefault()
         setNamePokemon(e.target.namePokemon.value)
     }
+
+    const handlePokesPerPage = (e) => {
+        setPokePerPage(parseInt(e.target.value))
+        localStorage.setItem("pokes_per_page", e.target.value )
+        setCurrentPage(1)
+    }
+
+
 
     const handleChangeType = (e) => {
         setCurrentType(e.target.value)
@@ -131,13 +141,13 @@ const Pokedex = () => {
 
         <p className='text-center p-3 dark:text-white'><span className='text-red-600 font-semibold'>Welcome {nameTrainer},</span> Here you can find your favorite pokemon!</p>
 
-        <form onSubmit={handleSubmit} className='flex flex-col sm:flex-row justify-center items-center sm:justify-around gap-2 p-2 '>
+        <form onSubmit={handleSubmit} className='flex flex-col sm:flex-row justify-center items-center sm:justify-around gap-2 p-2 flex-wrap'>
             <div className='flex shadow-md w-fit'>
                 <input id='namePokemon' type="text" placeholder='Search a pokemon...' className=' p-2 outline-none w-48 sm:w-auto dark:bg-slate-700 dark:text-white'/>
                 <button className='bg-red-500 p-3 text-white sm:px-5 hover:bg-red-600'>Search! </button>
             </div>
 
-            <select onChange={handleChangeType}  className='h-[42px] w-[273px] shadow-md capitalize dark:bg-slate-700 dark:text-white' >
+            <select onChange={handleChangeType}  className='h-[42px] w-[273px] sm:w-[260px] shadow-md capitalize dark:bg-slate-700 dark:text-white outline-none' >
                 <option value="" >All</option>
                 {
                     types.map((type) => <option value={type.name} key={type.url} >{ type.name} </option> )
@@ -145,7 +155,20 @@ const Pokedex = () => {
             </select>
 
 
+            {/* POKEMONS POR PAGINA */}
+            <div className='flex gap-2 justify-center items-center'>
+                <label className='dark:text-white'>Pokemons Dysplayed:</label>
+                <select  onChange={handlePokesPerPage} defaultValue={localStorage.getItem("pokes_per_page") || pokePerPage } className='h-[42px] w-[100px] shadow-md capitalize dark:bg-slate-700 dark:text-white outline-none'>
+                <option value={4}>4</option>
+                <option value={8}>8</option>
+                <option value={12}>12</option>
+                <option value={16}>16</option>
+                <option value={20}>20</option>
+            </select>
+            </div>
+            
         </form>
+        
 
 
                 {/**PAGINATION */}
