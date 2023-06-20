@@ -19,7 +19,6 @@ const Pokedex = () => {
     const pokemonsByName = pokemons.filter((pokemon) => pokemon.name.includes(namePokemon.toLocaleLowerCase().trim()));
 
   
-    console.log(pokePerPage);
     
     const paginationLogic = () => {
         const POKEMONS_PER_PAGE = pokePerPage;
@@ -67,15 +66,13 @@ const Pokedex = () => {
         setCurrentPage(1)
     }
 
-
-
-    const handleChangeType = (e) => {
+    const handleChangeType = (e) => {  
         setCurrentType(e.target.value)
     }
 
     const handlePreviusPage = () =>{
-        if (currentPage !== 1) {
-            setCurrentPage(currentPage -1)
+        if (currentPage !== 1) {     
+           setCurrentPage(currentPage -1)
         }
     }
 
@@ -173,13 +170,13 @@ const Pokedex = () => {
 
                 {/**PAGINATION */}
         <ul className='flex gap-2 justify-center py-3 px-2 flex-wrap'>
-            <li onClick={handleInitialPage} className='px-3 py-2 bg-red-500 font-bold text-white cursor-pointer'>{"<<"}</li>
-            <li onClick={handlePreviusPage} className='px-3 py-2 bg-red-500 font-bold text-white cursor-pointer'>{"<"}</li>
+            <li onClick={handleInitialPage} className={ ` ${currentPage === 1 ? 'bg-gray-500' : 'bg-red-500 hover:bg-red-700' } px-3 py-2  font-bold text-white cursor-pointer`}>{"<<"}</li>
+            <li onClick={handlePreviusPage} className={`  ${currentPage === 1 ? 'bg-gray-500' : 'bg-red-500 hover:bg-red-700' } px-3 py-2  font-bold text-white cursor-pointer`}>{"<"}</li>
             {
-            pagesInBlock.map(numberPage => <li onClick={() => setCurrentPage(numberPage)} key={numberPage} className={`px-3 py-2 bg-red-500 font-bold text-white cursor-pointer ${currentPage === numberPage && "bg-red-700" }`}>{numberPage}</li>)
+            pagesInBlock.map(numberPage => <li onClick={() => setCurrentPage(numberPage)} key={numberPage} className={`px-3 py-2 bg-red-500 hover:bg-red-700 hover:animate-wiggle font-bold text-white cursor-pointer ${currentPage === numberPage && "bg-red-700" }`}>{numberPage}</li>)
             }
-            <li onClick={handleNextPage} className='px-3 py-2 bg-red-500 font-bold text-white cursor-pointer'>{">"}</li>
-            <li onClick={hanldeLastPage} className='px-3 py-2 bg-red-500 font-bold text-white cursor-pointer'>{">>"}</li>
+            <li onClick={handleNextPage} className={` ${currentPage === lastPage ? 'bg-gray-500 ' : 'bg-red-500 hover:bg-red-700' } px-3 py-2 font-bold text-white cursor-pointer`}>{">"}</li>
+            <li onClick={hanldeLastPage} className={` ${currentPage === lastPage ? 'bg-gray-500' : 'bg-red-500 hover:bg-red-700' } px-3 py-2  font-bold text-white cursor-pointer`}>{">>"}</li>
         </ul>
 
         <PokemonsList pokemonsInPage={pokemonsInPage}/>
