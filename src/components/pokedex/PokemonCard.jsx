@@ -66,7 +66,7 @@ const PokemonCard = ({pokemonUrl}) => {
             .catch((err)=> console.log(err))
     }, [])
   return (
-    <Link to={`/pokedex/${pokemon?.name}`} className={ ` sm:w-[300px] min-w-[290px] m-3 p-2 rounded-md ${pokeLinearGradients[pokemon?.types[0].type.name]} `}>
+    <Link to={`/pokedex/${pokemon?.name}`} target='_blank' className={ ` sm:w-[300px] min-w-[290px] m-3 p-2 rounded-md ${pokeLinearGradients[pokemon?.types[0].type.name]} `}>
         <section className='bg-white dark:bg-slate-600 dark:text-white  transition-colors duration-300 ease-out'>
 
             {/** IMAGEN */}
