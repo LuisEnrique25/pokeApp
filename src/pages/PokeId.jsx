@@ -4,25 +4,25 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
 const pokeLinearGradients = {
-  normal: "bg-gradient-to-t to-gray-500 from-gray-300",
+  normal: "bg-gradient-to-t to-gray-400 from-gray-300",
   fighting: "bg-gradient-to-t to-red-900 from-red-500",
-  flying: "bg-gradient-to-t to-emerald-500 from-purple-500",
+  flying: "bg-gradient-to-t to-sky-200 from-cyan-300",
   poison: "bg-gradient-to-t to-purple-700 from-purple-400",
   ground: "bg-gradient-to-t to-amber-950 from-amber-700",
   rock: "bg-gradient-to-t to-gray-700 from-gray-500",
   bug: "bg-gradient-to-t to-green-800 from-emerald-600",
   ghost: "bg-gradient-to-t to-gray-900 from-purple-700",
-  steel: "bg-gradient-to-t to-gray-800 via-gary-500 from-gray-500",
+  steel: "bg-gradient-to-t to-zinc-800 via-gary-500 from-zinc-500",
   fire: "bg-gradient-to-t to-red-500 from-orange-500",
   water: "bg-gradient-to-t to-blue-500 from-blue-300",
   grass: "bg-gradient-to-t to-emerald-600 from-green-400",
   electric: "bg-gradient-to-t to-yellow-600 from-yellow-300",
-  psychic: "bg-gradient-to-t to-purple-700 from-pink-700",
+  psychic: "bg-gradient-to-t to-indigo-700 from-pink-500",
   ice: "bg-gradient-to-t to-cyan-500 from-cyan-300",
-  dragon: "bg-gradient-to-t to-red-500 from-orange-500",
+  dragon: "bg-gradient-to-t to-red-500 from-rose-900",
   dark: "bg-gradient-to-t to-gray-700 from-gray-900",
   fairy: "bg-gradient-to-t to-pink-600 from-pink-300",
-  unknown: "bg-gradient-to-t to-emerald-500 from-purple-500",
+  unknown: "bg-gradient-to-t to-gray-300 from-gray-500",
   shadow: "bg-gradient-to-t to-black from-gray-600"
 }
 
@@ -58,7 +58,7 @@ const PokeId = () => {
   const [mainMoves, setMainMoves] = useState([])
   
  
-  
+  console.log(pokemon);
   const percentProgresStat = (baseStat) => {
     const stat = `${(baseStat * 100) / 255}%`
     
@@ -92,7 +92,7 @@ const PokeId = () => {
           {/**HEADER */}
           <section className={`relative  h-16 sm:h-32 ${pokeLinearGradients[pokemon?.types[0].type.name]} transition-all duration-100 ease-linear absolute top-0 `}>
               <div className=' px-12 flex justify-center '>
-                  <img className='w-[150px] sm:w-[225px] absolute -translate-y-16 sm:-translate-y-20 transition-all duration-100 ease-linear drop-shadow-md z-50' src={pokemon?.sprites.other["official-artwork"].front_default} alt={pokemon?.name}/>
+                  <img className='w-[150px] sm:w-[225px] absolute -translate-y-16 sm:-translate-y-20 transition-all duration-100 ease-linear drop-shadow-md z-50' src={pokemon?.sprites.other["official-artwork"].front_default || "/images/notFound.webp"  } alt={pokemon?.name}/>
               </div>
 
           </section>
