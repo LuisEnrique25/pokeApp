@@ -4,9 +4,9 @@ import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 const Header = () => {
-
   const dispatch = useDispatch()
-  
+
+ 
   const handleClickLogOut = () => {
     dispatch(setNameTrainer(""))
   }

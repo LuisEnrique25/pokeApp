@@ -57,9 +57,6 @@ const PokemonCard = ({pokemonUrl}) => {
        return phraseTypes
    }
 
-
-
-
     useEffect(() => {
         axios.get(pokemonUrl)
             .then(({data}) => setPokemon(data))
@@ -90,10 +87,7 @@ const PokemonCard = ({pokemonUrl}) => {
 
             <hr  className='pb-1'/>
 
-
-
             <section className='grid grid-cols-2 p-3 gap-3'>
-
 
                 {/**Generar lista de stats */}
                 {
@@ -103,10 +97,7 @@ const PokemonCard = ({pokemonUrl}) => {
                         <span>{stat.base_stat}</span>
                     </div>))
                 }
-            </section>
-
-
-        
+            </section>      
         </section>
     </Link>
   )

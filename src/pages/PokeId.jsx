@@ -26,7 +26,6 @@ const pokeLinearGradients = {
   shadow: "bg-gradient-to-t to-black from-gray-600"
 }
 
-
 const pokeTextColors = {
   normal: "text-gray-500 dark:text-gray-300",
     fighting: "text-red-900",
@@ -57,17 +56,12 @@ const PokeId = () => {
   const [pokeMovements, setPokeMovements] = useState([])
   const [mainMoves, setMainMoves] = useState([])
   
- 
-  
   const percentProgresStat = (baseStat) => {
     const stat = `${(baseStat * 100) / 255}%`
     
     return stat
   }
 
-  
- 
-  
   useEffect(() => {
     const url = `https://pokeapi.co/api/v2/pokemon/${pokemonName}/`
 
@@ -144,9 +138,7 @@ const PokeId = () => {
             </div>
 
           </section>
-
-
-
+ 
            {/**STATS */}
 
           <section className='p-4'>
