@@ -30,7 +30,7 @@ const Home = () => {
 
             <form onSubmit={handleSubmit} className='flex rounded-sm overflow-hidden shadow-md'>
                 
-                <input required id='nameTrainer' type="text" placeholder='Type your name...' className=' p-2 outline-none w-52 sm:w-auto dark:bg-slate-700 '/>
+                <input required id='nameTrainer' type="text" placeholder='Type your name...' className=' p-2 outline-none w-52 sm:w-auto dark:bg-slate-700' maxLength={15} />
                 <button className='bg-red-500 p-3 text-white sm:px-5 hover:bg-red-600'>Start!</button>
                 
             </form>
