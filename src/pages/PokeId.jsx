@@ -4,8 +4,50 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
 const pokeLinearGradients = {
-  grass: "bg-gradient-to-t to-emerald-500 from-purple-500",
-  fire: "bg-gradient-to-t to-red-500 from-orange-500"
+  normal: "bg-gradient-to-t to-gray-500 from-gray-300",
+  fighting: "bg-gradient-to-t to-red-900 from-red-500",
+  flying: "bg-gradient-to-t to-emerald-500 from-purple-500",
+  poison: "bg-gradient-to-t to-purple-700 from-purple-400",
+  ground: "bg-gradient-to-t to-amber-950 from-amber-700",
+  rock: "bg-gradient-to-t to-gray-700 from-gray-500",
+  bug: "bg-gradient-to-t to-green-800 from-emerald-600",
+  ghost: "bg-gradient-to-t to-gray-900 from-purple-700",
+  steel: "bg-gradient-to-t to-gray-800 via-gary-500 from-gray-500",
+  fire: "bg-gradient-to-t to-red-500 from-orange-500",
+  water: "bg-gradient-to-t to-blue-500 from-blue-300",
+  grass: "bg-gradient-to-t to-emerald-600 from-green-400",
+  electric: "bg-gradient-to-t to-yellow-600 from-yellow-300",
+  psychic: "bg-gradient-to-t to-purple-700 from-pink-700",
+  ice: "bg-gradient-to-t to-cyan-500 from-cyan-300",
+  dragon: "bg-gradient-to-t to-red-500 from-orange-500",
+  dark: "bg-gradient-to-t to-gray-700 from-gray-900",
+  fairy: "bg-gradient-to-t to-pink-600 from-pink-300",
+  unknown: "bg-gradient-to-t to-emerald-500 from-purple-500",
+  shadow: "bg-gradient-to-t to-black from-gray-600"
+}
+
+
+const pokeTextColors = {
+  normal: "text-gray-500",
+  fighting: "text-red-900",
+  flying: "text-cyan-400",
+  poison: "text-purple-500",
+  ground: "text-amber-700",
+  rock: "text-gray-700",
+  bug: "text-lime-700",
+  ghost: "text-gray-900",
+  steel: "text-zinc-700",
+  fire: "text-red-600",
+  water: "text-blue-500",
+  grass: "text-emerald-600",
+  electric: "text-yellow-600",
+  psychic: "text-indigo-700",
+  ice: "text-cyan-500",
+  dragon: "text-rose-950",
+  dark: "text-black",
+  fairy: "text-pink-300",
+  unknown: "text-gray-300",
+  shadow: "text-gray-600"
 }
 
 const PokeId = () => {
@@ -15,7 +57,7 @@ const PokeId = () => {
   const [pokeMovements, setPokeMovements] = useState([])
   const [mainMoves, setMainMoves] = useState([])
   
-  console.log(mainMoves);
+ 
   
   const percentProgresStat = (baseStat) => {
     const stat = `${(baseStat * 100) / 255}%`
@@ -36,7 +78,7 @@ const PokeId = () => {
         setPokeMovements(data.moves)
         setMainMoves(data.abilities)
       })
-      .then((err)=> console.log(err))
+      .catch((err)=> console.log(err))
 
 
   }, [])
@@ -64,7 +106,7 @@ const PokeId = () => {
 
             <div className='flex justify-center items-center gap-3 px-4'>
               <hr className='border-gray-300 w-full border-[1px]'/>
-              <h2 className='capitalize font-semibold sm:text-2xl'>{pokemon?.name}</h2>
+              <h2 className={`capitalize font-semibold sm:text-2xl text-center ${pokeTextColors[pokemon?.types[0].type.name]}`}>{pokemon?.name}</h2>
               <hr className='border-gray-300 w-full border-[1px]'/>             
             </div>
 
@@ -87,7 +129,7 @@ const PokeId = () => {
               <h3>Type</h3>
               <div className='flex gap-3 flex-col md:flex-row'>
               {
-                pokeTypes.map((type) => <div key={type.type.url} className='bg-slate-600 py-1 w-20 sm:w-32 text-center rounded-sm px-3'> <h4 >{type.type.name}</h4></div> )
+                pokeTypes.map((type) => <div key={type.type.url} className={` py-1 w-20 sm:w-32 text-center text-white rounded-sm px-3 ${pokeLinearGradients[type.type.name]}  `}> <h4 >{type.type.name}</h4></div> )
               }
               </div>
             </div>
@@ -96,7 +138,7 @@ const PokeId = () => {
               <h3>Habilities</h3>
               <div className='flex gap-3 flex-col md:flex-row'>
               {
-                mainMoves.map((move) =>  <div key={move.ability.url} className='border-[1px] py-1 sm:w-32 text-center rounded-sm px-3'> <h4 >{move.ability.name}</h4></div> )
+                mainMoves.map((move) =>  <div key={move.slot} className='border-[1px] py-1 sm:w-32 text-center rounded-sm px-3'> <h4 >{move.ability.name}</h4></div> )
               }
               </div> 
             </div>
