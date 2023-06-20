@@ -126,18 +126,18 @@ const Pokedex = () => {
 
 
   return (
-    <main className='bg-slate-50'>
+    <main className='bg-slate-50   dark:bg-slate-800 min-h-screen'>
         <Header/>
 
-        <p className='text-center p-3'><span className='text-red-600 font-semibold'>Welcome {nameTrainer},</span> Here you can find your favorite pokemon!</p>
+        <p className='text-center p-3 dark:text-white'><span className='text-red-600 font-semibold'>Welcome {nameTrainer},</span> Here you can find your favorite pokemon!</p>
 
         <form onSubmit={handleSubmit} className='flex flex-col sm:flex-row justify-center items-center sm:justify-around gap-2 p-2 '>
             <div className='flex shadow-md w-fit'>
-                <input id='namePokemon' type="text" placeholder='Search a pokemon...' className=' p-2 outline-none w-48 sm:w-auto '/>
+                <input id='namePokemon' type="text" placeholder='Search a pokemon...' className=' p-2 outline-none w-48 sm:w-auto dark:bg-slate-700 dark:text-white'/>
                 <button className='bg-red-500 p-3 text-white sm:px-5 hover:bg-red-600'>Search! </button>
             </div>
 
-            <select onChange={handleChangeType}  className='h-[42px] w-[273px] shadow-md capitalize' >
+            <select onChange={handleChangeType}  className='h-[42px] w-[273px] shadow-md capitalize dark:bg-slate-700 dark:text-white' >
                 <option value="" >All</option>
                 {
                     types.map((type) => <option value={type.name} key={type.url} >{ type.name} </option> )
@@ -147,6 +147,8 @@ const Pokedex = () => {
 
         </form>
 
+
+                {/**PAGINATION */}
         <ul className='flex gap-2 justify-center py-3 px-2 flex-wrap'>
             <li onClick={handleInitialPage} className='px-3 py-2 bg-red-500 font-bold text-white cursor-pointer'>{"<<"}</li>
             <li onClick={handlePreviusPage} className='px-3 py-2 bg-red-500 font-bold text-white cursor-pointer'>{"<"}</li>

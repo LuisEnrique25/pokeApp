@@ -26,20 +26,20 @@ const pokeLinearGradients = {
 }
 
 const pokeTextColors = {
-    normal: "text-gray-500",
+    normal: "text-gray-500 dark:text-gray-300",
     fighting: "text-red-900",
     flying: "text-cyan-400",
-    poison: "text-purple-500",
-    ground: "text-amber-700",
-    rock: "text-gray-700",
-    bug: "text-lime-700",
+    poison: "text-purple-500 dark:text-purple-400",
+    ground: "text-amber-700 dark:text-amber-500",
+    rock: "text-gray-700 dark:text-gray-400",
+    bug: "text-lime-700 dark:text-lime-500",
     ghost: "text-gray-900",
-    steel: "text-zinc-700",
-    fire: "text-red-600",
-    water: "text-blue-500",
-    grass: "text-emerald-600",
-    electric: "text-yellow-600",
-    psychic: "text-indigo-700",
+    steel: "text-zinc-700 dark:text-zinc-400",
+    fire: "text-red-600 dark:text-red-400",
+    water: "text-blue-500 dark:text-blue-300",
+    grass: "text-emerald-600 dark:text-emerald-500",
+    electric: "text-yellow-600 dark:text-yellow-500",
+    psychic: "text-indigo-700 dark:text-indigo-400",
     ice: "text-cyan-500",
     dragon: "text-rose-950",
     dark: "text-black",
@@ -67,7 +67,7 @@ const PokemonCard = ({pokemonUrl}) => {
     }, [])
   return (
     <Link to={`/pokedex/${pokemon?.name}`} className={ ` sm:w-[300px] min-w-[290px] m-3 p-2 rounded-md ${pokeLinearGradients[pokemon?.types[0].type.name]} `}>
-        <section className='bg-white'>
+        <section className='bg-white dark:bg-slate-600 dark:text-white  transition-colors duration-300 ease-out'>
 
             {/** IMAGEN */}
             <section className={ ` relative h-40 ${pokeLinearGradients[pokemon?.types[0].type.name]} `}>

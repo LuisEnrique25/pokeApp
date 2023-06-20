@@ -28,26 +28,26 @@ const pokeLinearGradients = {
 
 
 const pokeTextColors = {
-  normal: "text-gray-500",
-  fighting: "text-red-900",
-  flying: "text-cyan-400",
-  poison: "text-purple-500",
-  ground: "text-amber-700",
-  rock: "text-gray-700",
-  bug: "text-lime-700",
-  ghost: "text-gray-900",
-  steel: "text-zinc-700",
-  fire: "text-red-600",
-  water: "text-blue-500",
-  grass: "text-emerald-600",
-  electric: "text-yellow-600",
-  psychic: "text-indigo-700",
-  ice: "text-cyan-500",
-  dragon: "text-rose-950",
-  dark: "text-black",
-  fairy: "text-pink-300",
-  unknown: "text-gray-300",
-  shadow: "text-gray-600"
+  normal: "text-gray-500 dark:text-gray-300",
+    fighting: "text-red-900",
+    flying: "text-cyan-400",
+    poison: "text-purple-500 dark:text-purple-400",
+    ground: "text-amber-700 dark:text-amber-500",
+    rock: "text-gray-700 dark:text-gray-400",
+    bug: "text-lime-700 dark:text-lime-500",
+    ghost: "text-gray-900",
+    steel: "text-zinc-700 dark:text-zinc-400",
+    fire: "text-red-600 dark:text-red-400",
+    water: "text-blue-500 dark:text-blue-300",
+    grass: "text-emerald-600 dark:text-emerald-500",
+    electric: "text-yellow-600 dark:text-yellow-500",
+    psychic: "text-indigo-700 dark:text-indigo-400",
+    ice: "text-cyan-500",
+    dragon: "text-rose-950",
+    dark: "text-black",
+    fairy: "text-pink-300",
+    unknown: "text-gray-300",
+    shadow: "text-gray-600"
 }
 
 const PokeId = () => {
@@ -84,11 +84,11 @@ const PokeId = () => {
   }, [])
 
   return (
-    <main className='bg-slate-50'>
+    <main className='bg-slate-50 dark:bg-slate-800 dark:text-white transition-colors duration-300 ease-out'>
       <Header/>
-      <section className='flex justify-center mt-14 items-center '>
+      <section className='flex justify-center mt-14 items-center'>
 
-        <article className='p-3 w-[400px] sm:w-[800px] transition-all duration-100 ease-linear  rounded-sm  shadow-xl  relative'>
+        <article className='p-3 w-[400px] sm:w-[800px] transition-all duration-100 ease-linear  rounded-sm  shadow-xl  relative dark:bg-gradient-to-t from-slate-700 via-slate-800 to-slate-800'>
           {/**HEADER */}
           <section className={`relative  h-16 sm:h-32 ${pokeLinearGradients[pokemon?.types[0].type.name]} transition-all duration-100 ease-linear absolute top-0 `}>
               <div className=' px-12 flex justify-center '>
@@ -105,9 +105,9 @@ const PokeId = () => {
             </div>
 
             <div className='flex justify-center items-center gap-3 px-4'>
-              <hr className='border-gray-300 w-full border-[1px]'/>
+              <hr className='border-gray-300 w-full border-[1px] dark:border-gray-700'/>
               <h2 className={`capitalize font-semibold sm:text-2xl text-center ${pokeTextColors[pokemon?.types[0].type.name]}`}>{pokemon?.name}</h2>
-              <hr className='border-gray-300 w-full border-[1px]'/>             
+              <hr className='border-gray-300 w-full border-[1px] dark:border-gray-700'/>             
             </div>
 
             <section className='flex justify-center gap-8 text-xs text-center py-3'>
@@ -138,7 +138,7 @@ const PokeId = () => {
               <h3>Habilities</h3>
               <div className='flex gap-3 flex-col md:flex-row'>
               {
-                mainMoves.map((move) =>  <div key={move.slot} className='border-[1px] py-1 sm:w-32 text-center rounded-sm px-3'> <h4 >{move.ability.name}</h4></div> )
+                mainMoves.map((move) =>  <div key={move.slot} className='border-[1px] py-1 sm:w-32 text-center rounded-sm px-3 dark:border-gray-700'> <h4 >{move.ability.name}</h4></div> )
               }
               </div> 
             </div>
@@ -152,7 +152,7 @@ const PokeId = () => {
           <section className='p-4'>
             <div className='flex items-center gap-3 mb-3'>
               <h4 className='text-3xl font-semibold'>Stats</h4>
-              <hr className='border-gray-300 w-full border-[1px]'/>
+              <hr className='border-gray-300 w-full border-[1px] dark:border-gray-700'/>
               <img src="/images/pokeball.webp" alt="" className='h-10  animate-spin-slow' />
             </div>
             <section>
@@ -163,7 +163,7 @@ const PokeId = () => {
                       <h5>{stat.stat.name}</h5>
                       <span>{stat.base_stat}/255</span>
                     </section>
-                    <section className='bg-gray-400 h-4 sm:h-8 rounded-md overflow-hidden'>
+                    <section className='bg-gray-400 dark:bg-gray-700 h-4 sm:h-8 rounded-md overflow-hidden'>
                       <div style={{width: percentProgresStat(stat.base_stat)}} className='h-full bg-gradient-to-r via-orange-600 from-orange-500 to-red-600 rounded-r-md '></div>
                     </section>
                   </article>))
@@ -176,18 +176,18 @@ const PokeId = () => {
 
       {/**SECCION DE HABILIDADES */}
 
-      <section className='flex justify-center mt-14 items-center mb-9 '>
+      <section className='flex justify-center mt-14 items-center dark:bg-gradient-to-t from-slate-700  to-slate-800 '>
          <article className='p-5 w-[400px] sm:w-[800px] transition-all duration-100 ease-linear  rounded-sm  shadow-xl relative '>
           {/**STAT TITLE */}
            <div className='flex items-center gap-3 mb-5 sm:mb-9'>
                 <h4 className='text-3xl font-semibold'>Movements</h4>
-                <hr className='border-gray-300 w-full border-[1px]'/>  
+                <hr className='border-gray-300 w-full border-[1px] dark:border-gray-700'/>  
                 <img src="/images/pokeball.webp" alt="" className='h-10  animate-spin-slow' />
             </div>
             {/**LISTA DE HABILIDADES */}
             <section className='flex flex-wrap gap-3 items-center '>
                 {
-                  pokeMovements.map((move) => <p className='text-sm sm:text-base bg-slate-200 py-2 px-3 rounded-2xl capitalize' key={move.move.url}>{move.move.name}</p>)
+                  pokeMovements.map((move) => <p className='text-sm sm:text-base bg-slate-200 dark:bg-gray-700 py-2 px-3 rounded-2xl capitalize' key={move.move.url}>{move.move.name}</p>)
                 }
             </section>
          </article>
