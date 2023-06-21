@@ -167,9 +167,11 @@ const Pokedex = () => {
         </form>
         
 
+        <PokemonsList pokemonsInPage={pokemonsInPage}/>
+
 
                 {/**PAGINATION */}
-        <ul className='flex gap-2 justify-center py-3 px-2 flex-wrap'>
+        <ul className='flex gap-2 justify-center py-3 px-2 flex-wrap text-xs sm:text-base transition-all duration-300 ease-linear'>
             <li onClick={handleInitialPage} className={ ` ${currentPage === 1 ? 'bg-gray-500' : 'bg-red-500 hover:bg-red-700' } px-3 py-2  font-bold text-white cursor-pointer`}>{"<<"}</li>
             <li onClick={handlePreviusPage} className={`  ${currentPage === 1 ? 'bg-gray-500' : 'bg-red-500 hover:bg-red-700' } px-3 py-2  font-bold text-white cursor-pointer`}>{"<"}</li>
             {
@@ -179,7 +181,6 @@ const Pokedex = () => {
             <li onClick={hanldeLastPage} className={` ${currentPage === lastPage ? 'bg-gray-500' : 'bg-red-500 hover:bg-red-700' } px-3 py-2  font-bold text-white cursor-pointer`}>{">>"}</li>
         </ul>
 
-        <PokemonsList pokemonsInPage={pokemonsInPage}/>
 
     </main>
   )
